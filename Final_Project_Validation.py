@@ -42,4 +42,13 @@ class ValidationClass():
                 default_value = -1
         return default_value
         
+    
+    def checkInt2(self, str_value): 
+        try:
+            default_value = int(str_value)
+        except TypeError:
+            print()
+        except: 
+            default_value = -1.01
+        return default_value
         

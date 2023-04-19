@@ -48,7 +48,7 @@ class TransactionItem:
     def get_gty(self):
         return self.__quantity
     def set_qty(self, new_qty):
-        self.__quantity = new_qty
+        self.__quantity += new_qty
     def get_price(self):
         return self.__price
     def set_price(self, new_price):
@@ -58,7 +58,16 @@ class TransactionItem:
         return self.__price * self.__quantity
     
     def __str__(self):
-        return "Total Items: "+str(self.__quantity)+"\nSubtotal: "+str(self.__quantity*self.__price)+"\nSales Tax: "+str(self.__quantity*self.__price*0.085)+"\nGrand Total: "+str((self.__quantity*self.__price)+(self.__quantity*self.__price*0.085))
+        return str(self.__id) + " \t" + '{:>25}'.format(self.__name) + "\t\t" + str(format(self.__quantity, '12,.0f')) + "\t\t $" + str(format(self.__price, '6,.2f'))
+        #return "Total Items: "+str(self.__quantity)+"\nSubtotal: "+str(self.__quantity*self.__price)+"\nSales Tax: "+str(self.__quantity*self.__price*0.085)+"\nGrand Total: "+str((self.__quantity*self.__price)+(self.__quantity*self.__price*0.085))
+
+
+
+
+
+
+
+
 
     
     
