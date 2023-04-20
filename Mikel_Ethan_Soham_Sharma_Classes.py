@@ -23,9 +23,18 @@ class Inventory:
         return self.__price
     
     def restock(self, new_stock):
-        self.__stock += new_stock
+        if new_stock < 0:
+            self.__stock -= new_stock
+            return True
+        else: 
+            return False
+        # self.__stock -= new_stock
     def purchase(self, purch_qty):
-        self.__stock -= purch_qty
+        if purch_qty > 0:
+            self.__stock -= purch_qty
+            return True
+        else: 
+            return False
     
     def __str__(self):
         return str(self.__id) + " \t" + '{:>25}'.format(self.__name) + "\t\t  $" + str(format(self.__price, '6,.2f')) + "\t\t " + str(format(self.__stock, '12,.0f'))
@@ -59,7 +68,6 @@ class TransactionItem:
     
     def __str__(self):
         return str(self.__id) + " \t" + '{:>25}'.format(self.__name) + "\t\t" + str(format(self.__quantity, '12,.0f')) + "\t\t $" + str(format(self.__price, '6,.2f'))
-        #return "Total Items: "+str(self.__quantity)+"\nSubtotal: "+str(self.__quantity*self.__price)+"\nSales Tax: "+str(self.__quantity*self.__price*0.085)+"\nGrand Total: "+str((self.__quantity*self.__price)+(self.__quantity*self.__price*0.085))
 
 
 
