@@ -5,6 +5,10 @@ Created on Mon Apr 17 17:14:21 2023
 
 @author: ethanmikel
 """
+#Author: Ethan Mikel and Soham Sharma
+#Final Project Name: Inventory Management for a Baking Supply Shop 
+#Due Date: April 26 By 11:59 PM
+#Program Description:
 
 class Inventory:
     def __init__(self, new_id, new_name, new_price, new_stock):
@@ -30,7 +34,7 @@ class Inventory:
             return False
         # self.__stock -= new_stock
     def purchase(self, purch_qty):
-        if purch_qty > 0:
+        if purch_qty <= self.__stock:
             self.__stock -= purch_qty
             return True
         else: 

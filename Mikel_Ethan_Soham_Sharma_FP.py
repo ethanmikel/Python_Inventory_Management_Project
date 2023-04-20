@@ -5,7 +5,12 @@ Created on Mon Apr 17 17:40:15 2023
 
 @author: ethanmikel
 """
-#importing the class file 
+#Author: Ethan Mikel and Soham Sharma
+#Final Project Name: Inventory Management for a Baking Supply Shop 
+#Due Date: April 26 By 11:59 PM
+#Program Description:
+
+
 import Mikel_Ethan_Soham_Sharma_Classes
 import Final_Project_Validation
 
@@ -73,17 +78,12 @@ def product_purchase(list_keys, qty_available_dict, item_dict, price_dict, item_
                 update_inventory(list_keys, item_2_dict)
                 end_menu(purchase_dict, purchase_keys)
         else: 
-            for item in list_keys:
-                if item == product_id:
-                    #print("FOUND",product_id)
-                    
-                    item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_dict, price_dict, purchase_dict, purchase_keys)
-                else: 
-                    item+=1
-            print()
-            menu_print(item_2_dict)
-            #print("Invalid product ID, please try again.")
-
+            if product_id in item_2_dict:
+                item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_dict, price_dict, purchase_dict, purchase_keys)
+            elif product_id not in item_2_dict:
+                print("Invalid product ID, please try again.")
+            #menu_print(item_2_dict)
+            
 def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_dict, price_dict, purchase_dict, purchase_keys):
     #print(list_keys)
     #print(item_dict)
@@ -93,42 +93,51 @@ def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_d
     flag = True 
     qty_purchase = -1.01
     position = 0
-    #print(qty_available_dict[desired_product_id])
-    # for i in list_keys:
-    #     if i == product_id:
-    #         print(i)
         
-    while qty_purchase == -1.01:
+    while qty_purchase == -1.01 or qty_purchase == -1.02:
         qty_purchase = validation_object.checkInt2(input("\nHow many items would you like the purchase? Enter negative number for returns. "))
         if qty_purchase == -1.01 or qty_purchase == 0:
             print("This is not a valid quantity. Try again.")
             qty_purchase = -1.01 
-        for i in list_keys:
-            if i == product_id:
-                purchase_dict[i].set_id(i)
-                purchase_dict[i].set_name(item_dict[i])
-                purchase_dict[i].set_price(price_dict[i])
-                purchase_dict[i].set_qty(qty_purchase)
-                item_2_dict[i].restock(qty_purchase)
-                if flag == True:
-                    flag = item_2_dict[i].purchase(qty_purchase)
-                elif flag == False:
+        if qty_purchase > 0: 
+            for i in list_keys:
+                if i == product_id and qty_purchase != -1.01:
+                    temp_quantity = item_2_dict[i].get_stock()
+                    flag =item_2_dict[i].purchase(qty_purchase)
+                    if flag == False:
+                        print("Insufficent stock, please enter a valid quantity and re-enter a product ID.\n")
+                        menu_print(item_2_dict)
+                    elif flag == True:
+                        purchase_dict[i].set_id(i)
+                        purchase_dict[i].set_name(item_dict[i])
+                        purchase_dict[i].set_price(price_dict[i])
+                        purchase_dict[i].set_qty(qty_purchase)
+                        print()
+                        menu_print(item_2_dict)
+
+        else: 
+            for i in list_keys:
+                if i == product_id and qty_purchase != -1.01:
                     flag = item_2_dict[i].restock(qty_purchase)
-                else:
-                    break
+                    if flag == False:
+                        qty_purchase == -1.02
+                    elif flag == True:
+                        purchase_dict[i].set_id(i)
+                        purchase_dict[i].set_name(item_dict[i])
+                        purchase_dict[i].set_price(price_dict[i])
+                        purchase_dict[i].set_qty(qty_purchase)
+                        print()
+                        menu_print(item_2_dict)
         if product_id not in purchase_keys:
             purchase_keys.append(product_id) 
-                
-        
 
-def update_inventory(list_keys, item_2_dict):  
-    import json
-    for i in item_2_dict:
-        json.dump(str(item_2_dict[i]), open('UpdatedInventory.json', 'w'))
-        
+def update_inventory(list_keys, item_2_dict):          
     updated_inventory = open('UpdatedInventory.txt', 'w')
     for i in item_2_dict:
-        updated_inventory.write((str(item_2_dict[i])+"\n"))
+        updated_inventory.write(str(item_2_dict[i].get_id())+"\n")
+        updated_inventory.write(str(item_2_dict[i].get_name())+"\n")
+        updated_inventory.write(str(item_2_dict[i].get_stock())+"\n")
+        updated_inventory.write(str(item_2_dict[i].get_price())+"\n")
     
 
 def end_menu(purchase_dict, purchase_keys):

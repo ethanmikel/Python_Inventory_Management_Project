@@ -5,11 +5,11 @@ Created on Thu Apr  6 17:47:23 2023
 
 @author: ethanmikel
 """
-#Author: Ethan Mikel
-#Homework Number & Name: 8 Employee Management
-#Due Date: April 17 by 11:59 PM
-#Program Description: Validates that the user inputs are either a float or an integer value, and return them back to the EmployeeFile to then be able to used in other programs. For the CheckInt method it is for if the production worker works day or night shift and will only return the proper vlaue if the user inputs a 1 or 2. For both class, if there is an incorrect entry it will return -1. 
-
+#Author: Ethan Mikel and Soham Sharma
+#Final Project Name: Inventory Management for a Baking Supply Shop 
+#Due Date: April 26 By 11:59 PM
+#Program Description:
+    
 import Mikel_Ethan_Soham_Sharma_Classes
 
 #ValidationClass ensure the user has inputed a correct value for inital and current input. 
