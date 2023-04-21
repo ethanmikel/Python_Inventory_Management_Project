@@ -108,8 +108,11 @@ def product_purchase(list_keys, qty_available_dict, item_dict, price_dict, item_
         #displays an error message if the user enters invalid product id
         if product_id == -1:
             print("Invalid product ID. Please try again.")
+<<<<<<< HEAD
 
         #if the user enters 0 to exit, either thank the user for visiting the store if its their first purchase or print the end menu
+=======
+>>>>>>> 7a046ab7362d988ff818d9478f319aae8f129618
         elif product_id == 0:
             #thanks the user for visiting the store if its their first purchase and updates the inventory in dictionary
             if count == 1:
@@ -142,6 +145,7 @@ def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_d
         
     #while loop that asks for quantity purchased until a valid value is entered
     while qty_purchase == -1.01 or qty_purchase == -1.02:
+<<<<<<< HEAD
         
         #asks the user for quantity to purchase
         qty_purchase = validation_object.checkInt2(input("\nHow many items would you like the purchase? Enter negative number for returns. "))
@@ -152,6 +156,12 @@ def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_d
             qty_purchase = -1.01
             
         #if the entered quantity is positive, it updates item stock and purchase history
+=======
+        qty_purchase = validation_object.checkInt2(input("\nHow many items would you like to purchase? Enter negative number for returns. "))
+        if qty_purchase == -1.01 or qty_purchase == 0:
+            print("That is not a valid quantity. Try again.")
+            qty_purchase = -1.01 
+>>>>>>> 7a046ab7362d988ff818d9478f319aae8f129618
         if qty_purchase > 0: 
             #loops through the list of keys of product id
             for i in list_keys:
