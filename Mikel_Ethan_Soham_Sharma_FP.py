@@ -69,10 +69,10 @@ def product_purchase(list_keys, qty_available_dict, item_dict, price_dict, item_
         product_id = validation_object.checkInt(input("\nWhich product ID would you like to purchase? Enter 0 to exit. "))
         count+=1
         if product_id == -1:
-            print("Invalid product ID, please try again.")
+            print("Invalid product ID. Please try again.")
         elif product_id == 0:
             if count == 1:
-                print("Thank you for visitng our store!")
+                print("Thank you for visiting our store!")
                 update_inventory(list_keys, item_2_dict)
             else:
                 update_inventory(list_keys, item_2_dict)
@@ -81,7 +81,7 @@ def product_purchase(list_keys, qty_available_dict, item_dict, price_dict, item_
             if product_id in item_2_dict:
                 item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_dict, price_dict, purchase_dict, purchase_keys)
             elif product_id not in item_2_dict:
-                print("Invalid product ID, please try again.")
+                print("Invalid product ID. Please try again.")
             #menu_print(item_2_dict)
             
 def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_dict, price_dict, purchase_dict, purchase_keys):
@@ -95,9 +95,9 @@ def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_d
     position = 0
         
     while qty_purchase == -1.01 or qty_purchase == -1.02:
-        qty_purchase = validation_object.checkInt2(input("\nHow many items would you like the purchase? Enter negative number for returns. "))
+        qty_purchase = validation_object.checkInt2(input("\nHow many items would you like to purchase? Enter negative number for returns. "))
         if qty_purchase == -1.01 or qty_purchase == 0:
-            print("This is not a valid quantity. Try again.")
+            print("That is not a valid quantity. Try again.")
             qty_purchase = -1.01 
         if qty_purchase > 0: 
             for i in list_keys:
@@ -105,7 +105,7 @@ def item_purchase(product_id, list_keys, qty_available_dict, item_dict, item_2_d
                     temp_quantity = item_2_dict[i].get_stock()
                     flag =item_2_dict[i].purchase(qty_purchase)
                     if flag == False:
-                        print("Insufficent stock, please enter a valid quantity and re-enter a product ID.\n")
+                        print("There is not enough inventory to purchase this amount. Try again.\n")
                         menu_print(item_2_dict)
                     elif flag == True:
                         purchase_dict[i].set_id(i)
